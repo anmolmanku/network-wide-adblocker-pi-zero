@@ -8,14 +8,14 @@
 Standard ISP routers lack granular traffic control and expose networks to telemetry and intrusive advertising. This project implements a **network-wide DNS sinkhole** to reduce bandwidth usage, block telemetry, and enforce network-level security policies without requiring client-side software.
 
 ## 🛠️ Tech Stack
-![Raspberry Pi](https://img.shields.io/badge/Hardware-Raspberry%20Pi%20Zero%202W-C51A4A?style=for-the-badge&logo=Raspberry-Pi&logoColor=white)
-![Linux](https://img.shields.io/badge/OS-Linux%20(Pi%20OS%20Lite)-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Pi-hole](https://img.shields.io/badge/Service-Pi--hole-96060C?style=for-the-badge&logo=pi-hole&logoColor=white)
 
-* **Networking:** DNS, DHCP, SSH
-* **Storage:** 64GB MicroSD
-
----
+| Component | Technology |
+| :--- | :--- |
+| **Hardware** | ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi%20Zero%202W-C51A4A?style=flat-square&logo=Raspberry-Pi&logoColor=white) |
+| **OS** | ![Linux](https://img.shields.io/badge/Linux%20(Pi%20OS%20Lite)-FCC624?style=flat-square&logo=linux&logoColor=black) |
+| **Service** | ![Pi-hole](https://img.shields.io/badge/Pi--hole-96060C?style=flat-square&logo=pi-hole&logoColor=white) |
+| **Storage** | 64GB MicroSD |
+| **Protocols** | `DNS` • `DHCP` • `SSH` • `IPv4/IPv6` |
 
 ## ⚙️ How It Works
 The Pi-hole acts as a gatekeeper for DNS requests. Instead of devices connecting directly to the open internet for ads, the traffic follows this logic:
@@ -25,10 +25,6 @@ The Pi-hole acts as a gatekeeper for DNS requests. Instead of devices connecting
 3.  **Sinkhole:** Pi-hole compares the request against a massive "Gravity" database.
 4.  **Result:** * **Blocked:** The Pi returns `0.0.0.0` (the ad never loads).
     * **Allowed:** The Pi returns the real IP and the content loads.
-
-
-
----
 
 ## ✨ Key Features & Benefits
 * **Privacy by Default:** Blocks tracking and telemetry at the source.

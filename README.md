@@ -2,8 +2,6 @@
 
 ### **Role:** Network Administration (Self-Hosted)
 
----
-
 ## 🚀 Overview
 Standard ISP routers lack granular traffic control and expose networks to telemetry and intrusive advertising. This project implements a **network-wide DNS sinkhole** to reduce bandwidth usage, block telemetry, and enforce network-level security policies without requiring client-side software.
 
@@ -49,3 +47,25 @@ graph TD
     C -->|6. Return Real IP| B
     B -->|7. Content Loads| A
 ```
+
+## 📋 Implementation Steps (The "How")
+* **Headless Initialization:** Flashed Raspberry Pi OS Lite to SD card. Created `wpa_supplicant.conf` (WLAN credentials) and an empty `ssh` file in the boot partition to enable immediate headless SSH access upon first boot.
+* **Static IP Assignment:** Edited `/etc/dhcpcd.conf` to assign a static private IP (e.g., `192.168.0.200`) to the interface, ensuring persistent DNS reachability for the network.
+* **Router Configuration:** Accessed ISP router gateway. Replaced default ISP DNS entries with the Pi-hole static IP.
+* **Blocklist Hardening:** Integrated regex filters to target specific Smart TV telemetry domains and added the `oisd` big blocklist for enhanced coverage beyond default lists.
+
+## 🧠 Key Competencies Demonstrated
+* **Linux System Administration:** Headless server management, SSH key management, package updates (`apt`), and service monitoring (`systemctl`).
+* **Network Protocols:** Deep understanding of DNS hierarchy (A/AAAA records), DHCP lease handling, and TCP/IPv4/IPv6 stacks.
+* **Network Security:** Traffic analysis, sinkholing strategies, and attack surface reduction via telemetry blocking.
+* **Infrastructure Management:** Single-board computer (SoC) configuration, power management, and thermal monitoring.
+
+## ⚠️ Challenges & Troubleshooting (Critical)
+**Issue:** ISP-provided router firmware locked the DNS settings, preventing the assignment of a custom local DNS server.
+
+**Resolution:**
+1.  Disabled the DHCP server on the ISP router entirely.
+2.  Enabled the DHCP server within the Pi-hole interface.
+3.  Configured Pi-hole to distribute IP addresses and force itself as the primary DNS gateway for all connected clients.
+
+**Result:** Successfully routed 100% of network traffic through the sinkhole despite hardware limitations.

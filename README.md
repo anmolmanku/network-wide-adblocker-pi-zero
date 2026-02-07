@@ -1,9 +1,39 @@
-# network-wide-adblocker-pi-zero
+# 🛡️ Network-Wide Adblocker (Pi-hole)
 
-## Role: Network Administration (Self Hosted)
-## Tech Stack: Raspberry Pi Zero 2W, microSD card 64Gb, Linux (Raspberry Pi OS Lite), Pi-hole, DNS, DHCP, SSH
+### **Role:** Network Administration (Self-Hosted)
 
-- Standard ISP routers lack granular traffic control and expose networks to telemetry/ads. Implemented a network-wide DNS sinkhole to reduce bandwidth usage, block telemetry, and enforce network-level security policies without client-side software
+---
+
+## 🚀 Overview
+Standard ISP routers lack granular traffic control and expose networks to telemetry and intrusive advertising. This project implements a **network-wide DNS sinkhole** to reduce bandwidth usage, block telemetry, and enforce network-level security policies without requiring client-side software.
+
+## 🛠️ Tech Stack
+![Raspberry Pi](https://img.shields.io/badge/Hardware-Raspberry%20Pi%20Zero%202W-C51A4A?style=for-the-badge&logo=Raspberry-Pi&logoColor=white)
+![Linux](https://img.shields.io/badge/OS-Linux%20(Pi%20OS%20Lite)-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Pi-hole](https://img.shields.io/badge/Service-Pi--hole-96060C?style=for-the-badge&logo=pi-hole&logoColor=white)
+
+* **Networking:** DNS, DHCP, SSH
+* **Storage:** 64GB MicroSD
+
+---
+
+## ⚙️ How It Works
+The Pi-hole acts as a gatekeeper for DNS requests. Instead of devices connecting directly to the open internet for ads, the traffic follows this logic:
+
+1.  **Request:** Client device asks for `ads.google.com`.
+2.  **Forward:** Router sends the query to the Raspberry Pi.
+3.  **Sinkhole:** Pi-hole compares the request against a massive "Gravity" database.
+4.  **Result:** * **Blocked:** The Pi returns `0.0.0.0` (the ad never loads).
+    * **Allowed:** The Pi returns the real IP and the content loads.
+
+
+
+---
+
+## ✨ Key Features & Benefits
+* **Privacy by Default:** Blocks tracking and telemetry at the source.
+* **Network Performance:** Saves bandwidth by preventing ad-heavy assets from downloading.
+* **Device Agnostic:** Protects everything from Smart TVs and IoT devices to mobile phones without installing individual apps.
 
 ```mermaid
 graph TD

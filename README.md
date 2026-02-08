@@ -49,10 +49,10 @@ graph TD
 ```
 
 ## 📋 Implementation Steps (The "How")
-* **Headless Initialization:** Flashed Raspberry Pi OS Lite to SD card. Created `wpa_supplicant.conf` (WLAN credentials) and an empty `ssh` file in the boot partition to enable immediate headless SSH access upon first boot.
-* **Static IP Assignment:** Edited `/etc/dhcpcd.conf` to assign a static private IP (e.g., `192.168.0.200`) to the interface, ensuring persistent DNS reachability for the network.
+* **Headless Initialization:** Flashed Raspberry Pi OS Lite (64bit) to a microSD card. Created a user account, password, configured Wi-Fi SSID, and enabled SSH with password authentication. 
+* **Static IP Assignment:** Utilized Network Manager Text User Interface (`nmtui`) to assign a static private IP (e.g., `10.0.0.x`) to the interface, ensuring persistent DNS reachability for the network.
 * **Router Configuration:** Accessed ISP router gateway. Replaced default ISP DNS entries with the Pi-hole static IP.
-* **Blocklist Hardening:** Integrated regex filters to target specific Smart TV telemetry domains and added the `oisd` big blocklist for enhanced coverage beyond default lists.
+* **Blocklist Hardening:** Integrated regex filters to target specific Smart TV telemetry domains and added a pre-defined big blocklist for enhanced coverage beyond default lists.
 
 ## 🧠 Key Competencies Demonstrated
 * **Linux System Administration:** Headless server management, SSH key management, package updates (`apt`), and service monitoring (`systemctl`).
